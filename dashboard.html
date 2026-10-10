@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Personal Finance Tracker - Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg"></div>
+  <header>
+    <div>
+      <b>Personal Finance Tracker</b>
+      <small>Welcome, <span id="userName"></span></small>
+    </div>
+    <button class="logout" onclick="logout()">Logout</button>
+  </header>
+
+  <main class="dash">
+    <section class="summary">
+      <div>
+        <small>Income</small>
+        <strong id="income">₹0.00</strong>
+      </div>
+      <div>
+        <small>Expenses</small>
+        <strong id="expense">₹0.00</strong>
+      </div>
+      <div>
+        <small>Balance</small>
+        <strong id="balance">₹0.00</strong>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Add Transaction</h2>
+      <div class="grid">
+        <select id="type">
+          <option value="INCOME">INCOME</option>
+          <option value="EXPENSE">EXPENSE</option>
+        </select>
+        <select id="category">
+          <option value="Food">Food</option>
+          <option value="Travel">Travel</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Education">Education</option>
+          <option value="Bills">Bills</option>
+          <option value="Salary">Salary</option>
+          <option value="Other">Other</option>
+        </select>
+        <input id="amount" type="number" min="0.01" step="0.01" placeholder="Amount (₹)">
+        <input id="date" type="date">
+        <input id="description" placeholder="Description (Optional)">
+      </div>
+      <button class="btn" onclick="addTransaction()">Add Transaction</button>
+      <p id="dashboardMsg"></p>
+    </section>
+
+    <section class="card table">
+      <h2>Transactions</h2>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Category</th>
+              <th>Amount (₹)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    document.getElementById("date").value = new Date().toISOString().slice(0, 10);
+    document.getElementById("userName").textContent = localStorage.getItem("name") || "User";
+    loadTransactions();
+  </script>
+</body>
+</html>
