@@ -21,7 +21,12 @@ export default function Login({ onLoginSuccess, onSwitchToRegister }) {
       const data = await api.login(email.trim(), password);
       onLoginSuccess(data);
     } catch (err) {
-      setError(err.message || 'Login failed. Please check credentials or backend connection.');
+      const msg = err?.message || '';
+      if (msg.includes('<') || msg.includes('html')) {
+        setError('Server is waking up. Please try again in a moment.');
+      } else {
+        setError(msg || 'Login failed. Please check credentials.');
+      }
     } finally {
       setIsLoading(false);
     }
