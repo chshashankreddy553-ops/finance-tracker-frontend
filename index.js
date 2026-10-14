@@ -10,12 +10,13 @@ const PORT = process.env.PORT || 3000;
 
 const distPath = path.join(__dirname, 'dist');
 
-// Serve static assets from the Vite build directory
+// Serve static assets from dist or root directory
 app.use(express.static(distPath));
+app.use(express.static(__dirname));
 
-// Fallback all other GET requests to index.html for SPA routing (Express 5 compatible)
+// Fallback all other GET requests to index.html for SPA routing
 app.use((req, res) => {
-  res.sendFile(path.join(distPath, 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, '0.0.0.0', () => {
