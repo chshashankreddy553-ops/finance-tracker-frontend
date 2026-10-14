@@ -12,8 +12,12 @@ export const getApiBase = () => {
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
       return 'http://localhost:8080/api';
     }
-    // If running on GitHub Pages or static host, connect to the deployed backend on Render
-    if (window.location.hostname.endsWith('github.io') || window.location.hostname.endsWith('vercel.app')) {
+    // If running on GitHub Pages, Netlify, or static host, connect to the deployed backend on Render
+    if (
+      window.location.hostname.endsWith('github.io') ||
+      window.location.hostname.endsWith('vercel.app') ||
+      window.location.hostname.endsWith('netlify.app')
+    ) {
       return 'https://two4eg107d13-finance-tracker.onrender.com/api';
     }
   }
